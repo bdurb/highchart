@@ -1,13 +1,17 @@
 <template>
   <div id="app">
     <h1>Hello</h1>
+    <Example />>
   </div>
 </template>
 
 <script>
-
+import Example from './components/Example'
 export default {
   name: 'app',
+  components: {
+    Example
+  }
 }
 </script>
 
