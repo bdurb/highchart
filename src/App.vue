@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <h1>Hello</h1>
-    <Example />>
+    <h1>HighChart Examples</h1>
+    <button @click="select('chart')" :class="{btnActive: selected === 'chart'}">Example 1</button>
+    <keep-alive>
+      <component :is="currentView"></component>
+    </keep-alive>
   </div>
 </template>
 
@@ -9,8 +12,31 @@
 import Example from './components/Example'
 export default {
   name: 'app',
+  data() {
+    return {
+      selected: 'chart',
+      currentView: 'chart'
+    }
+  },
   components: {
-    Example
+    chart: Example
+  },
+  methods: {
+    activate (elem) {
+      this.selected = elem
+    },
+    handler () {
+      var args = arguments
+      for (var arg of args) {
+        if (arg instanceof Function) {
+          arg()
+        }
+      }
+    },
+    select (elem) {
+      this.currentView = elem
+      this.activate(elem)
+    }
   }
 }
 </script>
@@ -23,5 +49,24 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+button {
+  padding: 10px 20px;
+  outline: none;
+  background: #828ea0;
+  color: #fff;
+  font-size: 16px;
+  margin: 5px;
+  border: 0px;
+}
+button:hover {
+  background: #a7aeb8;
+  transition: background 0.2s;
+}
+button:active {
+  color: rgb(117, 117, 117);
+}
+.btnActive {
+  color: #6fcd98
 }
 </style>
